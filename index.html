@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carta de Amor</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    Minha Carta de Amor ❤️
+  </header>
+
+  <!-- Letreiro animado -->
+  <div class="letreiro"></div>
+
+  <!-- Player de áudio -->
+  <div class="audio-player">
+    <audio id="background-audio" autoplay loop>
+      <source src="Cheia de Charme.mp3" type="audio/mpeg">
+      Seu navegador não suporta áudio HTML5.
+    </audio>
+    <button id="toggle-audio">⏸ Pausar música</button>
+  </div>
+
+  <!-- Fundo decorativo de imagens atrás do carrossel -->
+  <div class="carousel-background">
+    <img src="Imagem1.jpg" alt="decorativo" class="bg-photo">
+    <img src="Imagem2.jpg" alt="decorativo" class="bg-photo">
+    <img src="Imagem3.jpg" alt="decorativo" class="bg-photo">
+    <img src="Imagem4.jpg" alt="decorativo" class="bg-photo">
+    <img src="Imagem5.jpg" alt="decorativo" class="bg-photo">
+    <img src="Imagem6.jpg" alt="decorativo" class="bg-photo">
+    <img src="Imagem7.jpg" alt="decorativo" class="bg-photo">
+    <img src="Imagem8.jpg" alt="decorativo" class="bg-photo">
+    <img src="Imagem9.jpg" alt="decorativo" class="bg-photo">
+    <img src="Imagem10.jpg" alt="decorativo" class="bg-photo">
+  </div>
+
+  <!-- Carrossel de imagens -->
+  <div class="carousel" id="carousel"></div>
+
+  <div class="text-section">
+    <p>
+      Lembro exatamente como você estava naquele dia, vindo de encontro a mim no mercado como se fosse a coisa mais linda que eu já tinha visto. Te vi da mesma forma quando fui na sua casa pela primeira vez, uma garota tão doce, gentil, que não precisava ser o centro das atenções pra roubar toda minha atenção. Em relembrar sobre esse dia, noto que minha paixão por você se originou há mais de 2 anos, mas é com a maior felicidade do mundo que eu posso dizer que fazem 2 anos que estou inseparavelmente junto do amor da minha vida. Nesse mesmo olhar que transbordava admiração, paixão e encantamento, só aumentou tudo isso que já existia, virando ainda mais amor, orgulho e inspiração.
+      Hoje completamos nossos 2 anos de namoro, amor. Acima de todas as brincadeiras e piadas que muitas vezes fazemos, a pessoa que eu mais respeito nesse mundo é você, e é com você que quero seguir para o resto da minha vida. Eu sempre vou te amar, pois nossa história de amor nunca vai terminar. ❤️
+    </p>
+  </div>
+
+  <div class="hearts"></div>
+
+  <script>
+    // Carrossel de imagens
+    const imageSources = [
+      'Imagem1.jpg','Imagem2.jpg','Imagem3.jpg','Imagem4.jpg','Imagem5.jpg',
+      'Imagem6.jpg','Imagem7.jpg','Imagem8.jpg','Imagem9.jpg','Imagem10.jpg'
+    ];
+
+    const carousel = document.getElementById('carousel');
+    imageSources.forEach((src, index) => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = `Imagem ${index + 1}`;
+      img.className = index === 0 ? 'active' : '';
+      carousel.appendChild(img);
+    });
+
+    const images = carousel.querySelectorAll('img');
+    let current = 0;
+    setInterval(() => {
+      images[current].classList.remove('active');
+      current = (current + 1) % images.length;
+      images[current].classList.add('active');
+    }, 3000);
+
+    // Corações flutuando
+    const heartsContainer = document.querySelector('.hearts');
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (3 + Math.random() * 2) + 's';
+      heartsContainer.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(createHeart, 300);
+
+    // Texto "Te amo" flutuando
+    function createTeAmo() {
+      const text = document.createElement('div');
+      text.className = 'te-amo';
+      text.innerText = 'Te amo';
+      text.style.left = Math.random() * 100 + 'vw';
+      text.style.animationDuration = (4 + Math.random() * 2) + 's';
+      heartsContainer.appendChild(text);
+      setTimeout(() => text.remove(), 6000);
+    }
+    setInterval(createTeAmo, 1500);
+
+    // Controle de áudio
+    const audio = document.getElementById('background-audio');
+    audio.volume = 0.2;
+
+    const toggleBtn = document.getElementById('toggle-audio');
+    toggleBtn.addEventListener('click', () => {
+      if (audio.paused) {
+        audio.play();
+        toggleBtn.textContent = '⏸ Pausar música';
+      } else {
+        audio.pause();
+        toggleBtn.textContent = '▶ Tocar música';
+      }
+    });
+  </script>
+</body>
+</html>
